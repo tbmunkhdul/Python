@@ -27,6 +27,17 @@ class LinkedList(object):
                 tmpnode = tmpnode.next
             self.tail = new_node
 
+    def remove(self,data):
+        node = self.head
+        prev_node = None
+
+        while node is not None:
+            if node.data == data:
+                prev_node.next = node.next
+            prev_node = node
+            node = node.next       
+        
+
     def show(self):
         current_node = self.head
         while current_node is not None:
@@ -45,7 +56,10 @@ mylist.add(1)
 mylist.add(9)
 mylist.add(2)
 mylist.add(15)
-
 mylist.show()
-# output
-# 1  ->  2  ->  3  ->  5  ->  7  ->  9  ->  10  ->  15  ->  None
+print "-----------------remove ----------------"
+mylist.remove(2)
+mylist.show()
+print "-----------------add ----------------"
+mylist.add(8)
+mylist.show()
