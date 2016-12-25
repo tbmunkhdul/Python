@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Blog</title>
+</head>
+<body>
+
+	<ul> 
+
+        {% for bl in blog %}               
+        	{{ bl.blog_title }} : {{ bl.blog_date }} <br>
+        	{{ bl.blog_short }} <br>
+        	{{ bl.blog_content }} <br>
+        	{{ bl.blog_pic }} <br>
+        	<img src="{{ bl.blog_pic.url }}" alt="{{ bl.blog_pic.url }}">
+        	
+        {% endfor %}   
+  
+    </ul> 
+		
+</body>
+</html>

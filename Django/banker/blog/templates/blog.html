@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Blog</title>
+</head>
+<body>
+	<p><h1>All blogs</h1></p>
+	<hr>
+	<ul>               
+        {% for blog in blogs %}               
+        	{{ blog.blog_title }} : {{ blog.blog_date }} <br>
+        	{{ blog.blog_short }} <br>
+        	<a href="{{ blog.id }}"> readmore </a>
+        	<hr>                
+        {% endfor %}           
+    </ul> 
+		
+</body>
+</html>
