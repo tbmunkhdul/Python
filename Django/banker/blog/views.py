@@ -33,7 +33,7 @@ def showAllblogs(request):
                                           'squery':squery, 'categories': categories})
 
 def readMore(request, blogId):
-    blog = Blog.objects.filter(id__icontains=blogId)
+    blog = Blog.objects.filter(id=blogId)
     return render(request, 'readmore.html', {'blog': blog})
 
 
