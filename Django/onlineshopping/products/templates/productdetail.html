@@ -124,15 +124,25 @@
 
 				{% for product in products %}
 				    
-	  			    <div class="col-sm-4 col-lg-4 col-md-4">
+	  			    <div class="col-md-9">
                         <div class="thumbnail">
                             <img src="{{ product.product_pic.url }}" alt="">
-                            <div class="caption">
+                            <div class="caption-full">
                                 <p><h4 class="pull-right">${{ product.product_price }}</h4> </p>
 								<br>
                                 <h4>{{ product.product_name}}</h4>
-                                <p><a target="_blank" href="/productdetail/{{ product.id }}">See more about product</a>.</p>
-                            </div>
+                                <p>{{ product.product_desc}}</p>
+                            
+							
+							<div class="pull-right">
+							{% if user.is_authenticated %} 
+								<a href="/productdetail/{{ product.id }}/addtocart"> Add to Cart </a>
+							{% else %}
+								<a href="{% url 'login' %}"> Login and Add to Cart </a>
+							{% endif %}
+							</div>
+							<br>
+							</div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
                                 <p>
@@ -144,23 +154,16 @@
                                 </p>
                             </div>
                         </div>
+						<div class="well" id="reviews-anchor">
+							reviews
+						</div>
                     </div>
 					
 				{% endfor %}  
 				
                 </div>
 				
-					<center>
-                        {% if products.has_previous %}
-							<a href="?page={{ products.previous_page_number }}">previous</a>
-						{% endif %}
-					        <span class="current">
-								Page {{ products.number }} of {{ products.paginator.num_pages }}
-							</span>
-                        {% if products.has_next %}
-							<a href="?page={{ products.next_page_number }}">next</a>
-						{% endif %}
-                    </center>
+
             </div>
 
         </div>
