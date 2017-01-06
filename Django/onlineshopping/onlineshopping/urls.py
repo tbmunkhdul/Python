@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
     url(r'^category/', views.home, name='home'),
+    url(r'^mycart/$', views.mycart, name='mycart'),
     url(r'^productdetail/(\d+)/$', views.productdetail, name='productdetail'),
     url(r'^productdetail/(\d+)/addtocart/$', cartviews.addtocart),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),

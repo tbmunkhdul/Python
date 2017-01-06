@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from products.models import Product, Category
-from carts.models import Cart
+from carts.models import Cart, CartItem
 
 def home(request):
     selected_category = request.path
@@ -46,3 +46,24 @@ def productdetail(request, productid):
     product = Product.objects.filter(id=productid)
     categories = Category.objects.all()
     return render(request, 'productdetail.html', {'products': product, 'categories': categories, 'cartitems':cartitems})
+
+def mycart(request):
+    page = request.GET.get('page')
+    cartitems = None
+
+    product_list = Product.objects.filter(cartitem__cart__user=request.user)
+
+    paginator = Paginator(product_list, 9)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    
+    if str(request.user) is not "AnonymousUser":
+        cartitems = Cart.objects.filter(user_id=int(request.user.id))
+    
+    categories = Category.objects.all()
+    return render(request, 'home.html', {'products': products, 'categories': categories, 'cartitems':cartitems})
